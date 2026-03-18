@@ -1,0 +1,128 @@
+{
+  "tokens": {
+    "colors": {
+      "primary": "#E8734A",
+      "accent": "#F5A89A",
+      "background": "#FFFFFF",
+      "textDark": "#212121",
+      "textGrey": "#9E9E9E"
+    }
+  },
+  "styles": {
+    "classes": {
+      "screen": {
+        "padding": { "left": 24, "right": 24 },
+        "backgroundColor": "#FFFFFF"
+      },
+      "heading": {
+        "fontSize": 26,
+        "fontWeight": "bold",
+        "color": "#tokens.colors.textDark"
+      },
+      "subtitle": {
+        "fontSize": 14,
+        "color": "#tokens.colors.textGrey"
+      },
+      "primaryBtn": {
+        "backgroundColor": "#tokens.colors.accent",
+        "color": "#FFFFFF",
+        "borderRadius": 30,
+        "width": 999
+      }
+    }
+  },
+  "apis": {},
+  "actions": {},
+  "components": {},
+  "layout": {
+    "type": "screen",
+    "style": [".screen"],
+    "children": [
+      {
+        "type": "expanded",
+        "children": [
+          {
+            "type": "scroll",
+            "children": [
+              {
+                "type": "column",
+                "style": [{ "crossAxisAlignment": "start" }],
+                "children": [
+                  { "type": "spacer", "props": { "height": 80 } },
+                  {
+                    "type": "text",
+                    "props": { "text": "Enter OTP" },
+                    "style": [".heading"]
+                  },
+                  { "type": "spacer", "props": { "height": 12 } },
+                  {
+                    "type": "text",
+                    "props": { "text": "An OTP has been sent to the\nbelow mobile number" },
+                    "style": [".subtitle"]
+                  },
+                  { "type": "spacer", "props": { "height": 16 } },
+                  {
+                    "type": "row",
+                    "style": [{ "gap": 8, "crossAxisAlignment": "center" }],
+                    "children": [
+                      {
+                        "type": "text",
+                        "props": { "text": "{{form.mobile}}" },
+                        "style": [{ "fontSize": 15, "fontWeight": "w600", "color": "#212121" }]
+                      },
+                      {
+                        "type": "text",
+                        "props": { "text": "edit" },
+                        "style": [{ "fontSize": 14, "color": "#E8734A" }],
+                        "actions": [{ "event": "onClick", "type": "navigate", "props": { "route": "/login" } }]
+                      }
+                    ]
+                  },
+                  { "type": "spacer", "props": { "height": 24 } },
+                  {
+                    "type": "otp_input",
+                    "props": { "name": "otp", "length": 6 }
+                  },
+                  { "type": "spacer", "props": { "height": 20 } },
+                  {
+                    "type": "rich_text",
+                    "props": {
+                      "spans": [
+                        { "text": "Didn't get the OTP? ", "style": { "color": "#9E9E9E", "fontSize": 13 } },
+                        { "text": "Resend", "style": { "color": "#E8734A", "fontSize": 13, "fontWeight": "w600" } }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      { "type": "spacer", "props": { "height": 16 } },
+      {
+        "type": "button",
+        "props": { "text": "Confirm" },
+        "style": [".primaryBtn"],
+        "actions": [
+          {
+            "event": "onClick",
+            "type": "setState",
+            "props": { "key": "state.loggedIn", "value": true },
+            "onSuccess": {
+              "event": "onClick",
+              "type": "navigate",
+              "props": { "route": "/dashboard", "replace": true }
+            }
+          },
+          {
+            "event": "onClick",
+            "type": "navigate",
+            "props": { "route": "/dashboard", "replace": true }
+          }
+        ]
+      },
+      { "type": "spacer", "props": { "height": 24 } }
+    ]
+  }
+}

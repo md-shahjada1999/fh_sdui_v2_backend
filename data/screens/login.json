@@ -1,0 +1,111 @@
+{
+  "tokens": {
+    "colors": {
+      "primary": "#E8734A",
+      "accent": "#FF69B4",
+      "background": "#FFFFFF",
+      "textDark": "#212121",
+      "textGrey": "#9E9E9E",
+      "link": "#2196F3"
+    },
+    "spacing": { "sm": 8, "md": 16, "lg": 24, "xl": 32 }
+  },
+  "styles": {
+    "classes": {
+      "screen": {
+        "padding": { "left": 24, "right": 24 },
+        "backgroundColor": "#FFFFFF"
+      },
+      "heading": {
+        "fontSize": 26,
+        "fontWeight": "bold",
+        "color": "#tokens.colors.textDark"
+      },
+      "subtitle": {
+        "fontSize": 14,
+        "color": "#tokens.colors.textGrey"
+      },
+      "primaryBtn": {
+        "backgroundColor": "#tokens.colors.accent",
+        "color": "#FFFFFF",
+        "borderRadius": 30,
+        "width": 999
+      }
+    }
+  },
+  "apis": {},
+  "actions": {},
+  "components": {},
+  "layout": {
+    "type": "screen",
+    "style": [".screen"],
+    "children": [
+      {
+        "type": "expanded",
+        "children": [
+          {
+            "type": "scroll",
+            "children": [
+              {
+                "type": "column",
+                "style": [{ "crossAxisAlignment": "start" }],
+                "children": [
+                  { "type": "spacer", "props": { "height": 80 } },
+                  {
+                    "type": "text",
+                    "props": { "text": "Enter Mobile/Email\nto Login/Signup" },
+                    "style": [".heading"]
+                  },
+                  { "type": "spacer", "props": { "height": 8 } },
+                  {
+                    "type": "text",
+                    "props": { "text": "You will receive an OTP" },
+                    "style": [".subtitle"]
+                  },
+                  { "type": "spacer", "props": { "height": 32 } },
+                  {
+                    "type": "input",
+                    "props": {
+                      "name": "mobile",
+                      "label": "Mobile Number / Email id",
+                      "placeholder": "",
+                      "keyboardType": "phone",
+                      "maxLength": 10
+                    },
+                    "style": [{ "borderRadius": 12 }]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      { "type": "spacer", "props": { "height": 16 } },
+      {
+        "type": "checkbox",
+        "props": {
+          "name": "terms",
+          "spans": [
+            { "text": "Click here to accept ", "color": "#9E9E9E" },
+            { "text": "terms and conditions", "color": "#2196F3" }
+          ]
+        }
+      },
+      { "type": "spacer", "props": { "height": 16 } },
+      {
+        "type": "button",
+        "props": { "text": "Confirm" },
+        "style": [".primaryBtn"],
+        "enabled": "{{form.terms}}",
+        "actions": [
+          {
+            "event": "onClick",
+            "type": "navigate",
+            "props": { "route": "/otp" }
+          }
+        ]
+      },
+      { "type": "spacer", "props": { "height": 24 } }
+    ]
+  }
+}

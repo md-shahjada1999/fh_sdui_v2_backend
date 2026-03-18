@@ -1,0 +1,363 @@
+{
+  "tokens": {
+    "colors": {
+      "primary": "#1A56DB",
+      "background": "#F0F4FF",
+      "white": "#FFFFFF",
+      "textDark": "#111827",
+      "textGrey": "#9CA3AF",
+      "teal": "#0F766E",
+      "blue": "#1A56DB"
+    }
+  },
+  "styles": {
+    "classes": {
+      "screen": {
+        "backgroundColor": "#tokens.colors.background",
+        "padding": 0
+      },
+      "header": {
+        "backgroundColor": "#tokens.colors.primary",
+        "padding": { "left": 16, "right": 16, "top": 12, "bottom": 12 }
+      },
+      "sectionTitle": {
+        "fontSize": 16,
+        "fontWeight": "w700",
+        "color": "#tokens.colors.textDark"
+      },
+      "card": {
+        "backgroundColor": "#tokens.colors.white",
+        "borderRadius": 14,
+        "elevation": 1,
+        "padding": { "left": 14, "right": 14, "top": 12, "bottom": 12 }
+      },
+      "categoryIcon": {
+        "borderRadius": 14
+      },
+      "categoryLabel": {
+        "fontSize": 11,
+        "color": "#374151"
+      }
+    }
+  },
+  "apis": {},
+  "actions": {},
+  "components": {},
+  "layout": {
+    "type": "screen",
+    "style": [".screen"],
+    "children": [
+      {
+        "type": "container",
+        "id": "pharmacy-header",
+        "style": [".header"],
+        "children": [
+          {
+            "type": "row",
+            "style": [{ "crossAxisAlignment": "center", "mainAxisAlignment": "spaceBetween" }],
+            "children": [
+              {
+                "type": "row",
+                "style": [{ "gap": 8, "crossAxisAlignment": "center" }],
+                "children": [
+                  {
+                    "type": "icon",
+                    "props": { "name": "arrow_back", "size": 20 },
+                    "style": [{ "color": "#FFFFFF" }],
+                    "actions": [{ "event": "onClick", "type": "navigate", "props": { "route": "/dashboard", "replace": true } }]
+                  },
+                  {
+                    "type": "text",
+                    "props": { "text": "Pharmacy" },
+                    "style": [{ "fontSize": 17, "fontWeight": "w700", "color": "#FFFFFF" }]
+                  }
+                ]
+              },
+              {
+                "type": "icon",
+                "props": { "name": "shopping_cart", "size": 22 },
+                "style": [{ "color": "#FFFFFF" }],
+                "actions": [{ "event": "onClick", "type": "toast", "props": { "message": "Open cart" } }]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "type": "container",
+        "style": [{ "backgroundColor": "#1A56DB", "padding": { "left": 16, "right": 16, "top": 0, "bottom": 20 } }],
+        "children": [
+          {
+            "type": "input",
+            "id": "medicine-search",
+            "props": { "name": "medicine_search", "placeholder": "Search medicines, health products...", "keyboardType": "text" },
+            "style": [{ "backgroundColor": "#FFFFFF", "borderRadius": 12, "borderColor": "#FFFFFF" }]
+          }
+        ]
+      },
+
+      {
+        "type": "expanded",
+        "children": [
+          {
+            "type": "scroll",
+            "style": [{ "padding": { "left": 16, "right": 16, "top": 12 } }],
+            "children": [
+              {
+                "type": "column",
+                "style": [{ "gap": 12, "crossAxisAlignment": "start" }],
+                "children": [
+
+                  {
+                    "type": "container",
+                    "id": "upload-prescription",
+                    "style": [{ "backgroundColor": "#0F766E", "borderRadius": 14, "padding": { "left": 16, "right": 16, "top": 14, "bottom": 14 } }],
+                    "actions": [{ "event": "onClick", "type": "toast", "props": { "message": "Upload prescription" } }],
+                    "children": [
+                      {
+                        "type": "row",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "children": [
+                          {
+                            "type": "container",
+                            "style": [{ "width": 48, "height": 48, "backgroundColor": "#FFFFFF33", "borderRadius": 12 }],
+                            "children": [
+                              { "type": "icon", "props": { "name": "add", "size": 26 }, "style": [{ "color": "#FFFFFF", "padding": 11 }] }
+                            ]
+                          },
+                          { "type": "spacer", "props": { "width": 14 } },
+                          {
+                            "type": "expanded",
+                            "children": [
+                              {
+                                "type": "column",
+                                "style": [{ "crossAxisAlignment": "start" }],
+                                "children": [
+                                  { "type": "text", "props": { "text": "Upload Prescription" }, "style": [{ "fontSize": 15, "fontWeight": "w700", "color": "#FFFFFF" }] },
+                                  { "type": "spacer", "props": { "height": 3 } },
+                                  { "type": "text", "props": { "text": "Get medicines delivered by our pharmacist" }, "style": [{ "fontSize": 12, "color": "#99F6E4" }] }
+                                ]
+                              }
+                            ]
+                          },
+                          { "type": "icon", "props": { "name": "chevron_right", "size": 24 }, "style": [{ "color": "#FFFFFF" }] }
+                        ]
+                      }
+                    ]
+                  },
+
+                  { "type": "spacer", "props": { "height": 8 } },
+                  { "type": "text", "props": { "text": "Categories" }, "style": [".sectionTitle"] },
+
+                  {
+                    "type": "grid",
+                    "id": "categories-grid",
+                    "props": { "crossAxisCount": 4, "spacing": 12, "childAspectRatio": 0.82 },
+                    "children": [
+                      {
+                        "type": "column",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "actions": [{ "event": "onClick", "type": "toast", "props": { "message": "Medicines" } }],
+                        "children": [
+                          { "type": "container", "style": [{ "width": 56, "height": 56, "backgroundColor": "#EEF2FF", "borderRadius": 14 }], "children": [{ "type": "icon", "props": { "name": "medical_services", "size": 26 }, "style": [{ "color": "#4F46E5", "padding": 15 }] }] },
+                          { "type": "spacer", "props": { "height": 6 } },
+                          { "type": "text", "props": { "text": "Medicines" }, "style": [".categoryLabel"] }
+                        ]
+                      },
+                      {
+                        "type": "column",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "actions": [{ "event": "onClick", "type": "toast", "props": { "message": "Vitamins" } }],
+                        "children": [
+                          { "type": "container", "style": [{ "width": 56, "height": 56, "backgroundColor": "#FFFBEB", "borderRadius": 14 }], "children": [{ "type": "icon", "props": { "name": "local_pharmacy", "size": 26 }, "style": [{ "color": "#D97706", "padding": 15 }] }] },
+                          { "type": "spacer", "props": { "height": 6 } },
+                          { "type": "text", "props": { "text": "Vitamins" }, "style": [".categoryLabel"] }
+                        ]
+                      },
+                      {
+                        "type": "column",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "actions": [{ "event": "onClick", "type": "toast", "props": { "message": "Devices" } }],
+                        "children": [
+                          { "type": "container", "style": [{ "width": 56, "height": 56, "backgroundColor": "#F0FDF4", "borderRadius": 14 }], "children": [{ "type": "icon", "props": { "name": "visibility", "size": 26 }, "style": [{ "color": "#16A34A", "padding": 15 }] }] },
+                          { "type": "spacer", "props": { "height": 6 } },
+                          { "type": "text", "props": { "text": "Devices" }, "style": [".categoryLabel"] }
+                        ]
+                      },
+                      {
+                        "type": "column",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "actions": [{ "event": "onClick", "type": "toast", "props": { "message": "Skin Care" } }],
+                        "children": [
+                          { "type": "container", "style": [{ "width": 56, "height": 56, "backgroundColor": "#FFF1F2", "borderRadius": 14 }], "children": [{ "type": "icon", "props": { "name": "local_hospital", "size": 26 }, "style": [{ "color": "#E11D48", "padding": 15 }] }] },
+                          { "type": "spacer", "props": { "height": 6 } },
+                          { "type": "text", "props": { "text": "Skin Care" }, "style": [".categoryLabel"] }
+                        ]
+                      },
+                      {
+                        "type": "column",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "actions": [{ "event": "onClick", "type": "toast", "props": { "message": "Baby Care" } }],
+                        "children": [
+                          { "type": "container", "style": [{ "width": 56, "height": 56, "backgroundColor": "#F0F9FF", "borderRadius": 14 }], "children": [{ "type": "icon", "props": { "name": "person", "size": 26 }, "style": [{ "color": "#0284C7", "padding": 15 }] }] },
+                          { "type": "spacer", "props": { "height": 6 } },
+                          { "type": "text", "props": { "text": "Baby Care" }, "style": [".categoryLabel"] }
+                        ]
+                      },
+                      {
+                        "type": "column",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "actions": [{ "event": "onClick", "type": "toast", "props": { "message": "Fitness" } }],
+                        "children": [
+                          { "type": "container", "style": [{ "width": 56, "height": 56, "backgroundColor": "#FDF4FF", "borderRadius": 14 }], "children": [{ "type": "icon", "props": { "name": "vaccines", "size": 26 }, "style": [{ "color": "#A855F7", "padding": 15 }] }] },
+                          { "type": "spacer", "props": { "height": 6 } },
+                          { "type": "text", "props": { "text": "Fitness" }, "style": [".categoryLabel"] }
+                        ]
+                      },
+                      {
+                        "type": "column",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "actions": [{ "event": "onClick", "type": "toast", "props": { "message": "Ayurveda" } }],
+                        "children": [
+                          { "type": "container", "style": [{ "width": 56, "height": 56, "backgroundColor": "#ECFDF5", "borderRadius": 14 }], "children": [{ "type": "icon", "props": { "name": "biotech", "size": 26 }, "style": [{ "color": "#059669", "padding": 15 }] }] },
+                          { "type": "spacer", "props": { "height": 6 } },
+                          { "type": "text", "props": { "text": "Ayurveda" }, "style": [".categoryLabel"] }
+                        ]
+                      },
+                      {
+                        "type": "column",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "actions": [{ "event": "onClick", "type": "toast", "props": { "message": "Diabetic Care" } }],
+                        "children": [
+                          { "type": "container", "style": [{ "width": 56, "height": 56, "backgroundColor": "#FFF7ED", "borderRadius": 14 }], "children": [{ "type": "icon", "props": { "name": "science", "size": 26 }, "style": [{ "color": "#F97316", "padding": 15 }] }] },
+                          { "type": "spacer", "props": { "height": 6 } },
+                          { "type": "text", "props": { "text": "Diabetic" }, "style": [".categoryLabel"] }
+                        ]
+                      }
+                    ]
+                  },
+
+                  { "type": "spacer", "props": { "height": 8 } },
+                  { "type": "text", "props": { "text": "Recently Ordered" }, "style": [".sectionTitle"] },
+
+                  {
+                    "type": "container",
+                    "style": [".card"],
+                    "children": [
+                      {
+                        "type": "row",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "children": [
+                          {
+                            "type": "container",
+                            "style": [{ "width": 52, "height": 52, "backgroundColor": "#F3F4F6", "borderRadius": 10 }],
+                            "children": [{ "type": "icon", "props": { "name": "medical_services", "size": 28 }, "style": [{ "color": "#4F46E5", "padding": 12 }] }]
+                          },
+                          { "type": "spacer", "props": { "width": 12 } },
+                          {
+                            "type": "expanded",
+                            "children": [
+                              {
+                                "type": "column",
+                                "style": [{ "crossAxisAlignment": "start" }],
+                                "children": [
+                                  { "type": "text", "props": { "text": "Metformin 500mg" }, "style": [{ "fontSize": 14, "fontWeight": "w600", "color": "#111827" }] },
+                                  { "type": "text", "props": { "text": "Strip of 10 tablets" }, "style": [{ "fontSize": 12, "color": "#9CA3AF" }] },
+                                  { "type": "spacer", "props": { "height": 4 } },
+                                  { "type": "text", "props": { "text": "₹42.50" }, "style": [{ "fontSize": 13, "fontWeight": "w700", "color": "#1A56DB" }] }
+                                ]
+                              }
+                            ]
+                          },
+                          { "type": "text", "props": { "text": "Qty: 2" }, "style": [{ "fontSize": 13, "fontWeight": "w600", "color": "#1A56DB" }] }
+                        ]
+                      }
+                    ]
+                  },
+
+                  {
+                    "type": "container",
+                    "style": [".card"],
+                    "children": [
+                      {
+                        "type": "row",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "children": [
+                          {
+                            "type": "container",
+                            "style": [{ "width": 52, "height": 52, "backgroundColor": "#F3F4F6", "borderRadius": 10 }],
+                            "children": [{ "type": "icon", "props": { "name": "local_pharmacy", "size": 28 }, "style": [{ "color": "#D97706", "padding": 12 }] }]
+                          },
+                          { "type": "spacer", "props": { "width": 12 } },
+                          {
+                            "type": "expanded",
+                            "children": [
+                              {
+                                "type": "column",
+                                "style": [{ "crossAxisAlignment": "start" }],
+                                "children": [
+                                  { "type": "text", "props": { "text": "Vitamin D3 60K IU" }, "style": [{ "fontSize": 14, "fontWeight": "w600", "color": "#111827" }] },
+                                  { "type": "text", "props": { "text": "4 capsules" }, "style": [{ "fontSize": 12, "color": "#9CA3AF" }] },
+                                  { "type": "spacer", "props": { "height": 4 } },
+                                  { "type": "text", "props": { "text": "₹129.00" }, "style": [{ "fontSize": 13, "fontWeight": "w700", "color": "#1A56DB" }] }
+                                ]
+                              }
+                            ]
+                          },
+                          { "type": "text", "props": { "text": "Qty: 1" }, "style": [{ "fontSize": 13, "fontWeight": "w600", "color": "#1A56DB" }] }
+                        ]
+                      }
+                    ]
+                  },
+
+                  { "type": "spacer", "props": { "height": 8 } },
+
+                  {
+                    "type": "container",
+                    "style": [{ "backgroundColor": "#DBEAFE", "borderRadius": 12, "padding": { "left": 14, "right": 14, "top": 12, "bottom": 12 } }],
+                    "children": [
+                      {
+                        "type": "row",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "children": [
+                          { "type": "icon", "props": { "name": "check", "size": 22 }, "style": [{ "color": "#1D4ED8" }] },
+                          { "type": "spacer", "props": { "width": 10 } },
+                          {
+                            "type": "expanded",
+                            "children": [
+                              {
+                                "type": "column",
+                                "style": [{ "crossAxisAlignment": "start" }],
+                                "children": [
+                                  { "type": "text", "props": { "text": "Free delivery on orders above ₹299" }, "style": [{ "fontSize": 13, "fontWeight": "w600", "color": "#1E40AF" }] },
+                                  { "type": "text", "props": { "text": "Estimated delivery: 2–4 hrs" }, "style": [{ "fontSize": 11, "color": "#3B82F6" }] }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+
+                  { "type": "spacer", "props": { "height": 12 } },
+
+                  {
+                    "type": "button",
+                    "id": "view-cart-btn",
+                    "props": { "text": "🛒  View Cart  •  ₹214.00" },
+                    "style": [{ "backgroundColor": "#1A56DB", "color": "#FFFFFF", "borderRadius": 14, "width": 999 }],
+                    "actions": [{ "event": "onClick", "type": "toast", "props": { "message": "Opening cart..." } }]
+                  },
+
+                  { "type": "spacer", "props": { "height": 24 } }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,362 @@
+{
+  "tokens": {
+    "colors": {
+      "primary": "#E8734A",
+      "background": "#FF69B4",
+      "white": "#FFFFFF",
+      "textDark": "#212121",
+      "textGrey": "#9E9E9E",
+      "badge": "#E8734A"
+    }
+  },
+  "styles": {
+    "classes": {
+      "screen": {
+        "backgroundColor": "#tokens.colors.background",
+        "padding": 0
+      },
+      "topBar": {
+        "padding": { "left": 16, "right": 16, "top": 12, "bottom": 8 },
+        "backgroundColor": "#FFFFFF"
+      },
+      "searchBar": {
+        "padding": { "left": 16, "right": 16, "top": 8, "bottom": 8 },
+        "backgroundColor": "#FFFFFF"
+      },
+      "card": {
+        "padding": 14,
+        "backgroundColor": "#tokens.colors.white",
+        "borderRadius": 12,
+        "elevation": 1
+      },
+      "serviceTitle": {
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "color": "#tokens.colors.textDark"
+      },
+      "serviceSubtitle": {
+        "fontSize": 11,
+        "color": "#tokens.colors.textGrey"
+      },
+      "badge": {
+        "fontSize": 9,
+        "fontWeight": "w600",
+        "color": "#tokens.colors.badge",
+        "backgroundColor": "#FFF3EE",
+        "padding": { "left": 8, "right": 8, "top": 4, "bottom": 4 },
+        "borderRadius": 4
+      },
+      "sectionTitle": {
+        "fontSize": 20,
+        "fontWeight": "bold",
+        "color": "#tokens.colors.textDark"
+      }
+    }
+  },
+  "apis": {},
+  "actions": {},
+  "components": {},
+  "layout": {
+    "type": "screen",
+    "style": [".screen"],
+    "children": [
+      {
+        "type": "container",
+        "style": [".topBar"],
+        "children": [
+          {
+            "type": "row",
+            "style": [{ "mainAxisAlignment": "spaceBetween", "crossAxisAlignment": "center" }],
+            "children": [
+              {
+                "type": "column",
+                "style": [{ "crossAxisAlignment": "start" }],
+                "children": [
+                  {
+                    "type": "row",
+                    "style": [{ "gap": 2, "crossAxisAlignment": "center" }],
+                    "children": [
+                      { "type": "icon", "props": { "name": "location_on", "size": 18 }, "style": [{ "color": "#E8734A" }] },
+                      { "type": "text", "props": { "text": "Home" }, "style": [{ "fontSize": 14, "fontWeight": "w600" }] },
+                      { "type": "icon", "props": { "name": "arrow_drop_down", "size": 20 } }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "props": { "text": "iSprout, 7th floor, Plot No: 25, ..." },
+                    "style": [{ "fontSize": 11, "color": "#9E9E9E" }]
+                  }
+                ]
+              },
+              {
+                "type": "row",
+                "style": [{ "gap": 10 }],
+                "children": [
+                  {
+                    "type": "icon",
+                    "props": { "name": "notifications", "size": 20 },
+                    "style": [{ "backgroundColor": "#FFF3EE", "borderRadius": 8, "color": "#E8734A", "padding": 8 }]
+                  },
+                  {
+                    "type": "icon",
+                    "props": { "name": "person", "size": 20 },
+                    "style": [{ "backgroundColor": "#212121", "borderRadius": 20, "color": "#FFFFFF", "padding": 8 }]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "type": "expanded",
+        "children": [
+          {
+            "type": "scroll",
+            "style": [{ "padding": { "left": 16, "right": 16, "top": 12 } }],
+            "children": [
+              {
+                "type": "column",
+                "style": [{ "gap": 12 }],
+                "children": [
+
+                  {
+                    "type": "container",
+                    "style": [{ "padding": { "left": 16, "right": 8, "top": 12, "bottom": 12 }, "backgroundColor": "#FFFFFF", "borderRadius": 12, "elevation": 1 }],
+                    "children": [
+                      {
+                        "type": "row",
+                        "style": [{ "crossAxisAlignment": "center" }],
+                        "children": [
+                          { "type": "icon", "props": { "name": "search", "size": 22 }, "style": [{ "color": "#9E9E9E" }] },
+                          { "type": "spacer", "props": { "width": 8 } },
+                          {
+                            "type": "expanded",
+                            "children": [
+                              { "type": "text", "props": { "text": "Search for Pharmacy" }, "style": [{ "fontSize": 14, "color": "#BDBDBD" }] }
+                            ]
+                          },
+                          { "type": "icon", "props": { "name": "mic", "size": 22 }, "style": [{ "color": "#E8734A" }] }
+                        ]
+                      }
+                    ]
+                  },
+
+                  {
+                    "type": "container",
+                    "style": [".card"],
+                    "children": [
+                      {
+                        "type": "row",
+                        "style": [{ "crossAxisAlignment": "start" }],
+                        "children": [
+                          {
+                            "type": "expanded",
+                            "children": [
+                              {
+                                "type": "column",
+                                "style": [{ "crossAxisAlignment": "start", "gap": 6 }],
+                                "children": [
+                                  { "type": "text", "props": { "text": "Diagnostics" }, "style": [".sectionTitle"] },
+                                  {
+                                    "type": "row",
+                                    "style": [{ "gap": 4, "crossAxisAlignment": "center" }],
+                                    "children": [
+                                      { "type": "icon", "props": { "name": "check", "size": 12 }, "style": [{ "color": "#4CAF50" }] },
+                                      { "type": "text", "props": { "text": "SAME DAY SLOT BOOKING" }, "style": [{ "fontSize": 10, "fontWeight": "w500", "color": "#9E9E9E" }] }
+                                    ]
+                                  },
+                                  {
+                                    "type": "rich_text",
+                                    "props": {
+                                      "spans": [
+                                        { "text": "🏠 home collection  •  ", "style": { "fontSize": 11, "color": "#9E9E9E" } },
+                                        { "text": "🏥 at center", "style": { "fontSize": 11, "color": "#9E9E9E" } }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "type": "container",
+                                    "style": [".badge"],
+                                    "children": [
+                                      { "type": "text", "props": { "text": "UP TO 20% OFF" }, "style": [{ "fontSize": 9, "fontWeight": "w600", "color": "#E8734A" }] }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          { "type": "icon", "props": { "name": "science", "size": 60 }, "style": [{ "color": "#E8734A" }] }
+                        ]
+                      }
+                    ]
+                  },
+
+                  {
+                    "type": "grid",
+                    "props": { "crossAxisCount": 2, "spacing": 12, "childAspectRatio": 1.15 },
+                    "children": [
+                      {
+                        "type": "container",
+                        "style": [".card"],
+                        "actions": [],
+                        "children": [
+                          {
+                            "type": "column",
+                            "style": [{ "crossAxisAlignment": "start", "gap": 4 }],
+                            "children": [
+                              { "type": "text", "props": { "text": "Consultation" }, "style": [".serviceTitle"] },
+                              { "type": "text", "props": { "text": "INSTANT APPOINTMENT" }, "style": [".serviceSubtitle"] },
+                              { "type": "spacer", "props": { "height": 4 } },
+                              { "type": "container", "style": [".badge"], "children": [
+                                { "type": "text", "props": { "text": "UP TO 20% OFF" }, "style": [{ "fontSize": 9, "fontWeight": "w600", "color": "#E8734A" }] }
+                              ]}
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "container",
+                        "style": [".card"],
+                        "actions": [],
+                        "children": [
+                          {
+                            "type": "column",
+                            "style": [{ "crossAxisAlignment": "start", "gap": 4 }],
+                            "children": [
+                              { "type": "text", "props": { "text": "Dental" }, "style": [".serviceTitle"] },
+                              { "type": "text", "props": { "text": "LOREM IPSUM" }, "style": [".serviceSubtitle"] },
+                              { "type": "spacer", "props": { "height": 4 } },
+                              { "type": "container", "style": [".badge"], "children": [
+                                { "type": "text", "props": { "text": "UP TO 30% OFF" }, "style": [{ "fontSize": 9, "fontWeight": "w600", "color": "#E8734A" }] }
+                              ]}
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "container",
+                        "style": [".card"],
+                        "actions": [{ "event": "onClick", "type": "navigate", "props": { "route": "/module/vaccine" } }],
+                        "children": [
+                          {
+                            "type": "column",
+                            "style": [{ "crossAxisAlignment": "start", "gap": 4 }],
+                            "children": [
+                              { "type": "text", "props": { "text": "Vision" }, "style": [".serviceTitle"] },
+                              { "type": "spacer", "props": { "height": 4 } },
+                              { "type": "container", "style": [".badge"], "children": [
+                                { "type": "text", "props": { "text": "UP TO 20% OFF" }, "style": [{ "fontSize": 9, "fontWeight": "w600", "color": "#E8734A" }] }
+                              ]}
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "container",
+                        "style": [".card"],
+                        "actions": [{ "event": "onClick", "type": "navigate", "props": { "route": "/module/pharmacy" } }],
+                        "children": [
+                          {
+                            "type": "column",
+                            "style": [{ "crossAxisAlignment": "start", "gap": 4 }],
+                            "children": [
+                              { "type": "text", "props": { "text": "Pharmacy" }, "style": [".serviceTitle"] },
+                              { "type": "spacer", "props": { "height": 4 } },
+                              { "type": "container", "style": [".badge"], "children": [
+                                { "type": "text", "props": { "text": "UP TO 20% OFF" }, "style": [{ "fontSize": 9, "fontWeight": "w600", "color": "#E8734A" }] }
+                              ]}
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+
+                  {
+                    "type": "button",
+                    "props": { "text": "VIEW MORE", "variant": "outlined" },
+                    "style": [{ "borderColor": "#E0E0E0", "color": "#212121", "borderRadius": 8, "width": 999 }]
+                  },
+
+                  { "type": "spacer", "props": { "height": 4 } },
+
+                  {
+                    "type": "carousel",
+                    "props": { "height": 180 },
+                    "style": [{ "borderRadius": 12 }],
+                    "children": [
+                      {
+                        "type": "container",
+                        "style": [{ "backgroundColor": "#2E7D6B", "borderRadius": 12, "padding": 20, "width": 999, "height": 180 }],
+                        "children": [
+                          {
+                            "type": "column",
+                            "style": [{ "crossAxisAlignment": "start", "mainAxisAlignment": "end" }],
+                            "children": [
+                              { "type": "text", "props": { "text": "Nutrition\nWebinar" }, "style": [{ "fontSize": 22, "fontWeight": "bold", "color": "#FFFFFF" }] },
+                              { "type": "spacer", "props": { "height": 8 } },
+                              { "type": "text", "props": { "text": "August 22nd,\n3:00 PM – 4:00 PM." }, "style": [{ "fontSize": 12, "color": "#FFFFFF" }] }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "container",
+                        "style": [{ "backgroundColor": "#1976D2", "borderRadius": 12, "padding": 20, "width": 999, "height": 180 }],
+                        "children": [
+                          {
+                            "type": "column",
+                            "style": [{ "crossAxisAlignment": "start", "mainAxisAlignment": "end" }],
+                            "children": [
+                              { "type": "text", "props": { "text": "Health\nCheckup Camp" }, "style": [{ "fontSize": 22, "fontWeight": "bold", "color": "#FFFFFF" }] },
+                              { "type": "spacer", "props": { "height": 8 } },
+                              { "type": "text", "props": { "text": "September 5th,\n10:00 AM – 2:00 PM." }, "style": [{ "fontSize": 12, "color": "#FFFFFF" }] }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "container",
+                        "style": [{ "backgroundColor": "#7B1FA2", "borderRadius": 12, "padding": 20, "width": 999, "height": 180 }],
+                        "children": [
+                          {
+                            "type": "column",
+                            "style": [{ "crossAxisAlignment": "start", "mainAxisAlignment": "end" }],
+                            "children": [
+                              { "type": "text", "props": { "text": "Yoga &\nMeditation" }, "style": [{ "fontSize": 22, "fontWeight": "bold", "color": "#FFFFFF" }] },
+                              { "type": "spacer", "props": { "height": 8 } },
+                              { "type": "text", "props": { "text": "Every Saturday,\n7:00 AM – 8:00 AM." }, "style": [{ "fontSize": 12, "color": "#FFFFFF" }] }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+
+                  { "type": "spacer", "props": { "height": 16 } }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "type": "bottom_nav",
+        "props": {
+          "activeIndex": 0,
+          "activeColor": "#E8734A",
+          "items": [
+            { "label": "Home", "icon": "home_filled" },
+            { "label": "Services", "icon": "grid_view" },
+            { "label": "Pharmacy", "icon": "local_pharmacy" },
+            { "label": "My Orders", "icon": "shopping_cart" },
+            { "label": "Need Help?", "icon": "headphones" }
+          ]
+        }
+      }
+    ]
+  }
+}
