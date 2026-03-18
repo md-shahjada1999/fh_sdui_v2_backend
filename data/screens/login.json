@@ -33,7 +33,14 @@
       }
     }
   },
-  "apis": {},
+  "apis": {
+    "sendOtp": {
+      "method": "POST",
+      "url": "/api/auth/send-otp",
+      "body": { "mobile": "{{form.mobile}}" },
+      "store": "sendOtpResponse"
+    }
+  },
   "actions": {},
   "components": {},
   "layout": {
@@ -96,12 +103,22 @@
         "type": "button",
         "props": { "text": "Confirm" },
         "style": [".primaryBtn"],
-        "enabled": "{{form.terms}}",
+        "enabled": "{{form.terms && form.mobile.length >= 10}}",
         "actions": [
           {
             "event": "onClick",
-            "type": "navigate",
-            "props": { "route": "/otp" }
+            "type": "api",
+            "target": "sendOtp",
+            "onSuccess": {
+              "event": "",
+              "type": "navigate",
+              "target": "/otp"
+            },
+            "onFail": {
+              "event": "",
+              "type": "toast",
+              "props": { "message": "Login failed. Try again." }
+            }
           }
         ]
       },

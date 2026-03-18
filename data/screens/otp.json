@@ -31,7 +31,20 @@
       }
     }
   },
-  "apis": {},
+  "apis": {
+    "verifyOtp": {
+      "method": "POST",
+      "url": "/api/auth/verify-otp",
+      "body": { "mobile": "{{form.mobile}}", "otp": "{{form.otp}}" },
+      "store": "verifyOtpResponse"
+    },
+    "resendOtp": {
+      "method": "POST",
+      "url": "/api/auth/send-otp",
+      "body": { "mobile": "{{form.mobile}}" },
+      "store": "resendOtpResponse"
+    }
+  },
   "actions": {},
   "components": {},
   "layout": {
@@ -74,7 +87,7 @@
                         "type": "text",
                         "props": { "text": "edit" },
                         "style": [{ "fontSize": 14, "color": "#E8734A" }],
-                        "actions": [{ "event": "onClick", "type": "navigate", "props": { "route": "/login" } }]
+                        "actions": [{ "event": "onClick", "type": "navigate", "target": "/login" }]
                       }
                     ]
                   },
@@ -89,7 +102,27 @@
                     "props": {
                       "spans": [
                         { "text": "Didn't get the OTP? ", "style": { "color": "#9E9E9E", "fontSize": 13 } },
-                        { "text": "Resend", "style": { "color": "#E8734A", "fontSize": 13, "fontWeight": "w600" } }
+                        {
+                          "text": "Resend",
+                          "style": { "color": "#E8734A", "fontSize": 13, "fontWeight": "w600" },
+                          "actions": [
+                            {
+                              "event": "onClick",
+                              "type": "api",
+                              "target": "resendOtp",
+                              "onSuccess": {
+                                "event": "",
+                                "type": "toast",
+                                "props": { "message": "OTP resent successfully" }
+                              },
+                              "onFail": {
+                                "event": "",
+                                "type": "toast",
+                                "props": { "message": "Failed to resend OTP" }
+                              }
+                            }
+                          ]
+                        }
                       ]
                     }
                   }
@@ -107,18 +140,23 @@
         "actions": [
           {
             "event": "onClick",
-            "type": "setState",
-            "props": { "key": "state.loggedIn", "value": true },
+            "type": "api",
+            "target": "verifyOtp",
             "onSuccess": {
-              "event": "onClick",
-              "type": "navigate",
-              "props": { "route": "/dashboard", "replace": true }
+              "event": "",
+              "type": "chain",
+              "props": {
+                "actions": [
+                  { "event": "", "type": "setState", "props": { "key": "state.loggedIn", "value": true } },
+                  { "event": "", "type": "navigate", "target": "/dashboard", "props": { "replace": true } }
+                ]
+              }
+            },
+            "onFail": {
+              "event": "",
+              "type": "toast",
+              "props": { "message": "Invalid OTP. Try again." }
             }
-          },
-          {
-            "event": "onClick",
-            "type": "navigate",
-            "props": { "route": "/dashboard", "replace": true }
           }
         ]
       },

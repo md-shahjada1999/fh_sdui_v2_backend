@@ -7,11 +7,22 @@ const path = require("path");
 const os = require("os");
 
 const app = express();
-const PORT = 5000;
+const PORT = 5050;
 const SCREENS_DIR = path.join(__dirname, "data", "screens");
 const BASE_VERSION = "1.0.0";
 
 app.use(cors());
+app.use(express.json());
+
+// ── In-memory OTP store ─────────────────────────────────────────────────────
+
+const otpStore = new Map(); // mobile → { otp, expiresAt }
+const OTP_EXPIRY_MS = 5 * 60 * 1000; // 5 minutes
+const MOCK_OTP = "123456";
+
+function generateOtp() {
+  return MOCK_OTP; // fixed for easy testing; swap with random if needed
+}
 
 // ── Manifest state ──────────────────────────────────────────────────────────
 
@@ -114,12 +125,76 @@ app.get("/screens/:screenId", (req, res) => {
   fs.createReadStream(filePath).pipe(res);
 });
 
+// ── Auth APIs ───────────────────────────────────────────────────────────────
+
+app.post("/api/auth/send-otp", (req, res) => {
+  const { mobile } = req.body;
+
+  if (!mobile || mobile.length < 10) {
+    return res.status(400).json({ success: false, message: "Valid mobile number is required" });
+  }
+
+  const otp = generateOtp();
+  otpStore.set(mobile, { otp, expiresAt: Date.now() + OTP_EXPIRY_MS });
+
+  console.log(`[auth] OTP for ${mobile}: ${otp}`);
+
+  res.json({
+    success: true,
+    message: "OTP sent successfully",
+    data: { mobile, expiresInSeconds: OTP_EXPIRY_MS / 1000 },
+  });
+});
+
+app.post("/api/auth/verify-otp", (req, res) => {
+  const { mobile, otp } = req.body;
+
+  if (!mobile || !otp) {
+    return res.status(400).json({ success: false, message: "mobile and otp are required" });
+  }
+
+  const record = otpStore.get(mobile);
+
+  if (!record) {
+    return res.status(400).json({ success: false, message: "No OTP requested for this number" });
+  }
+
+  if (Date.now() > record.expiresAt) {
+    otpStore.delete(mobile);
+    return res.status(400).json({ success: false, message: "OTP expired, please resend" });
+  }
+
+  if (record.otp !== otp) {
+    return res.status(401).json({ success: false, message: "Invalid OTP" });
+  }
+
+  otpStore.delete(mobile);
+
+  // Mock JWT-like token
+  const token = Buffer.from(JSON.stringify({ mobile, iat: Date.now() })).toString("base64");
+
+  console.log(`[auth] ${mobile} verified successfully`);
+// console.log(token);
+console.log(`mock.${token}`);
+  res.json({
+    success: true,
+    message: "OTP verified",
+    data: {
+      token: `mock.${token}`,
+      user: { mobile, name: "FH User", isNewUser: false },
+    },
+  });
+});
+
 // ── Start ───────────────────────────────────────────────────────────────────
 
 app.listen(PORT, () => {
   console.log(`\n  SDUI Mock Backend running`);
   console.log(`  ─────────────────────────`);
-  console.log(`  Manifest : http://${HOST}:${PORT}/manifest.json`);
-  console.log(`  Screens  : http://${HOST}:${PORT}/screens/:id`);
-  console.log(`  Watching : ${SCREENS_DIR}\n`);
+  console.log(`  Manifest  : http://${HOST}:${PORT}/manifest.json`);
+  console.log(`  Screens   : http://${HOST}:${PORT}/screens/:id`);
+  console.log(`  Send OTP  : POST http://${HOST}:${PORT}/api/auth/send-otp`);
+  console.log(`  Verify OTP: POST http://${HOST}:${PORT}/api/auth/verify-otp`);
+  console.log(`  Mock OTP  : ${MOCK_OTP}`);
+  console.log(`  Watching  : ${SCREENS_DIR}\n`);
 });
