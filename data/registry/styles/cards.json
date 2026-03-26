@@ -1,0 +1,22 @@
+{
+  "card": {
+    "padding": 14,
+    "backgroundColor": "#colors.white",
+    "borderRadius": 12,
+    "elevation": 1
+  },
+  "cardLg": {
+    "padding": { "left": 14, "right": 14, "top": 12, "bottom": 12 },
+    "backgroundColor": "#colors.white",
+    "borderRadius": 14,
+    "elevation": 1
+  },
+  "badge": {
+    "fontSize": "#typography.tiny",
+    "fontWeight": "w600",
+    "color": "#colors.badge",
+    "backgroundColor": "#colors.badgeBg",
+    "padding": { "left": 8, "right": 8, "top": 4, "bottom": 4 },
+    "borderRadius": 4
+  }
+}

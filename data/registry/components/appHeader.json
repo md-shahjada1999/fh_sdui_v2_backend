@@ -1,0 +1,35 @@
+{
+  "type": "container",
+  "style": [".layout.topBar"],
+  "children": [
+    {
+      "type": "row",
+      "inlineStyle": { "crossAxisAlignment": "center", "mainAxisAlignment": "spaceBetween" },
+      "children": [
+        {
+          "type": "row",
+          "inlineStyle": { "gap": 8, "crossAxisAlignment": "center" },
+          "children": [
+            {
+              "type": "icon",
+              "props": { "name": "arrow_back", "size": 20 },
+              "inlineStyle": { "color": "#colors.textPrimary" },
+              "actions": [{ "event": "onClick", "type": "pop" }]
+            },
+            {
+              "type": "text",
+              "props": { "text": "{{props.title}}" },
+              "inlineStyle": { "fontSize": "#typography.h4", "fontWeight": "w700", "color": "#colors.textPrimary" }
+            }
+          ]
+        },
+        {
+          "type": "icon",
+          "props": { "name": "{{props.rightIcon}}", "size": 22 },
+          "inlineStyle": { "color": "#colors.textPrimary" },
+          "visible": "{{props.rightIcon.isNotEmpty}}"
+        }
+      ]
+    }
+  ]
+}

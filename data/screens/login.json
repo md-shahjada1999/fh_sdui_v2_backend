@@ -1,128 +1,114 @@
 {
-  "tokens": {
-    "colors": {
-      "primary": "#E8734A",
-      "accent": "#FF69B4",
-      "background": "#FFFFFF",
-      "textDark": "#212121",
-      "textGrey": "#9E9E9E",
-      "link": "#2196F3"
-    },
-    "spacing": { "sm": 8, "md": 16, "lg": 24, "xl": 32 }
-  },
-  "styles": {
-    "classes": {
-      "screen": {
-        "padding": { "left": 24, "right": 24 },
-        "backgroundColor": "#FFFFFF"
-      },
-      "heading": {
-        "fontSize": 26,
-        "fontWeight": "bold",
-        "color": "#tokens.colors.textDark"
-      },
-      "subtitle": {
-        "fontSize": 14,
-        "color": "#tokens.colors.textGrey"
-      },
-      "primaryBtn": {
-        "backgroundColor": "#tokens.colors.accent",
-        "color": "#FFFFFF",
-        "borderRadius": 30,
-        "width": 999
-      }
-    }
-  },
+  "screenId": "login",
+  "tokens": {},
+  "styles": {},
   "apis": {
     "sendOtp": {
       "method": "POST",
       "url": "/api/auth/send-otp",
-      "body": { "mobile": "{{form.mobile}}" },
-      "store": "sendOtpResponse"
+      "body": {
+        "mobile": "{{form.mobile}}"
+      }
     }
   },
   "actions": {},
   "components": {},
   "layout": {
     "type": "screen",
-    "style": [".screen"],
+    "style": [".layout.screenPadded"],
+    "inlineStyle": { "backgroundColor": "#colors.background" },
     "children": [
       {
-        "type": "expanded",
-        "children": [
-          {
-            "type": "scroll",
-            "children": [
-              {
-                "type": "column",
-                "style": [{ "crossAxisAlignment": "start" }],
-                "children": [
-                  { "type": "spacer", "props": { "height": 80 } },
-                  {
-                    "type": "text",
-                    "props": { "text": "Enter Mobile/Email\nto Login/Signup" },
-                    "style": [".heading"]
-                  },
-                  { "type": "spacer", "props": { "height": 8 } },
-                  {
-                    "type": "text",
-                    "props": { "text": "You will receive an OTP" },
-                    "style": [".subtitle"]
-                  },
-                  { "type": "spacer", "props": { "height": 32 } },
-                  {
-                    "type": "input",
-                    "props": {
-                      "name": "mobile",
-                      "label": "Mobile Number / Email id",
-                      "placeholder": "",
-                      "keyboardType": "phone",
-                      "maxLength": 10
-                    },
-                    "style": [{ "borderRadius": 12 }]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+        "type": "spacer",
+        "props": { "height": 60 }
       },
-      { "type": "spacer", "props": { "height": 16 } },
+      {
+        "type": "image",
+        "props": { "url": "https://flip.health/assets/images/logo-light.png" },
+        "inlineStyle": { "width": 120, "height": 120, "borderRadius": 20 }
+      },
+      {
+        "type": "spacer",
+        "props": { "height": 32 }
+      },
+      {
+        "type": "text",
+        "props": { "text": "Welcome Backkkkkkkk" },
+        "inlineStyle": {
+          "fontSize": "#typography.h1",
+          "fontWeight": "bold",
+          "color": "#colors.textPrimary"
+        }
+      },
+      {
+        "type": "text",
+        "props": { "text": "Enter your mobile number to continue" },
+        "inlineStyle": {
+          "fontSize": "#typography.body",
+          "color": "#colors.textSecondary",
+          "padding": { "top": 8, "bottom": 0, "left": 0, "right": 0 }
+        }
+      },
+      {
+        "type": "spacer",
+        "props": { "height": 32 }
+      },
+      {
+        "type": "input",
+        "props": {
+          "name": "mobile",
+          "placeholder": "Mobile Number",
+          "keyboardType": "phone",
+          "maxLength": 10
+        },
+        "style": [".inputs.field"]
+      },
+      {
+        "type": "spacer",
+        "props": { "height": 16 }
+      },
       {
         "type": "checkbox",
         "props": {
           "name": "terms",
-          "spans": [
-            { "text": "Click here to accept ", "color": "#9E9E9E" },
-            { "text": "terms and conditions", "color": "#2196F3" }
-          ]
+          "label": "I agree to the Terms & Conditions"
         }
       },
-      { "type": "spacer", "props": { "height": 16 } },
+      {
+        "type": "spacer",
+        "props": { "height": 24 }
+      },
       {
         "type": "button",
-        "props": { "text": "Confirm" },
-        "style": [".primaryBtn"],
+        "props": { "text": "Continue" },
+        "style": [".buttons.primary"],
+        "inlineStyle": { "width": 1000 },
         "enabled": "{{form.terms && form.mobile.length >= 10}}",
         "actions": [
           {
-            "event": "onClick",
-            "type": "api",
-            "target": "sendOtp",
-            "onSuccess": {
-              "event": "",
-              "type": "navigate",
-              "target": "/otp"
-            },
-            "onFail": {
-              "event": "",
-              "type": "toast",
-              "props": { "message": "Login failed. Try again." }
-            }
+            "event": "onSubmit",
+            "type": "chain",
+            "actions": [
+              {
+                "type": "setState",
+                "props": { "key": "state.mobile", "value": "{{form.mobile}}" }
+              },
+              {
+                "type": "api",
+                "target": "sendOtp",
+                "onSuccess": {
+                  "type": "navigate",
+                  "props": { "route": "/otp" }
+                },
+                "onFail": {
+                  "type": "toast",
+                  "props": { "message": "{{_error.sendOtp.message}}" }
+                }
+              }
+            ]
           }
         ]
-      },
-      { "type": "spacer", "props": { "height": 24 } }
+      }
     ]
   }
 }

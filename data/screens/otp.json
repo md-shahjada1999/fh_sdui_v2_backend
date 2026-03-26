@@ -1,47 +1,18 @@
 {
-  "tokens": {
-    "colors": {
-      "primary": "#E8734A",
-      "accent": "#F5A89A",
-      "background": "#FFFFFF",
-      "textDark": "#212121",
-      "textGrey": "#9E9E9E"
-    }
-  },
-  "styles": {
-    "classes": {
-      "screen": {
-        "padding": { "left": 24, "right": 24 },
-        "backgroundColor": "#FFFFFF"
-      },
-      "heading": {
-        "fontSize": 26,
-        "fontWeight": "bold",
-        "color": "#tokens.colors.textDark"
-      },
-      "subtitle": {
-        "fontSize": 14,
-        "color": "#tokens.colors.textGrey"
-      },
-      "primaryBtn": {
-        "backgroundColor": "#tokens.colors.accent",
-        "color": "#FFFFFF",
-        "borderRadius": 30,
-        "width": 999
-      }
-    }
-  },
+  "screenId": "otp",
+  "tokens": {},
+  "styles": {},
   "apis": {
     "verifyOtp": {
       "method": "POST",
       "url": "/api/auth/verify-otp",
-      "body": { "mobile": "{{form.mobile}}", "otp": "{{form.otp}}" },
+      "body": { "mobile": "{{state.mobile}}", "otp": "{{form.otp}}" },
       "store": "verifyOtpResponse"
     },
     "resendOtp": {
       "method": "POST",
       "url": "/api/auth/send-otp",
-      "body": { "mobile": "{{form.mobile}}" },
+      "body": { "mobile": "{{state.mobile}}" },
       "store": "resendOtpResponse"
     }
   },
@@ -49,7 +20,7 @@
   "components": {},
   "layout": {
     "type": "screen",
-    "style": [".screen"],
+    "style": [".layout.screenPadded"],
     "children": [
       {
         "type": "expanded",
@@ -59,35 +30,35 @@
             "children": [
               {
                 "type": "column",
-                "style": [{ "crossAxisAlignment": "start" }],
+                "inlineStyle": { "crossAxisAlignment": "start" },
                 "children": [
                   { "type": "spacer", "props": { "height": 80 } },
                   {
                     "type": "text",
                     "props": { "text": "Enter OTP" },
-                    "style": [".heading"]
+                    "style": [".layout.heading"]
                   },
                   { "type": "spacer", "props": { "height": 12 } },
                   {
                     "type": "text",
                     "props": { "text": "An OTP has been sent to the\nbelow mobile number" },
-                    "style": [".subtitle"]
+                    "style": [".layout.subtitle"]
                   },
                   { "type": "spacer", "props": { "height": 16 } },
                   {
                     "type": "row",
-                    "style": [{ "gap": 8, "crossAxisAlignment": "center" }],
+                    "inlineStyle": { "gap": 8, "crossAxisAlignment": "center" },
                     "children": [
                       {
                         "type": "text",
-                        "props": { "text": "{{form.mobile}}" },
-                        "style": [{ "fontSize": 15, "fontWeight": "w600", "color": "#212121" }]
+                        "props": { "text": "{{state.mobile}}" },
+                        "inlineStyle": { "fontSize": "#typography.label", "fontWeight": "w600", "color": "#colors.textPrimary" }
                       },
                       {
                         "type": "text",
                         "props": { "text": "edit" },
-                        "style": [{ "fontSize": 14, "color": "#E8734A" }],
-                        "actions": [{ "event": "onClick", "type": "navigate", "target": "/login" }]
+                        "inlineStyle": { "fontSize": "#typography.body", "color": "#colors.primary" },
+                        "actions": [{ "event": "onClick", "type": "pop" }]
                       }
                     ]
                   },
@@ -101,22 +72,19 @@
                     "type": "rich_text",
                     "props": {
                       "spans": [
-                        { "text": "Didn't get the OTP? ", "style": { "color": "#9E9E9E", "fontSize": 13 } },
+                        { "text": "Didn't get the OTP? ", "style": { "color": "#colors.textSecondary", "fontSize": "#typography.bodySmall" } },
                         {
                           "text": "Resend",
-                          "style": { "color": "#E8734A", "fontSize": 13, "fontWeight": "w600" },
+                          "style": { "color": "#colors.primary", "fontSize": "#typography.bodySmall", "fontWeight": "w600" },
                           "actions": [
                             {
-                              "event": "onClick",
                               "type": "api",
                               "target": "resendOtp",
                               "onSuccess": {
-                                "event": "",
                                 "type": "toast",
                                 "props": { "message": "OTP resent successfully" }
                               },
                               "onFail": {
-                                "event": "",
                                 "type": "toast",
                                 "props": { "message": "Failed to resend OTP" }
                               }
@@ -136,26 +104,25 @@
       {
         "type": "button",
         "props": { "text": "Confirm" },
-        "style": [".primaryBtn"],
+        "style": [".buttons.primary"],
+        "inlineStyle": { "width": 1000 },
+        "enabled": "{{form.otp.length >= 6}}",
         "actions": [
           {
             "event": "onClick",
             "type": "api",
             "target": "verifyOtp",
             "onSuccess": {
-              "event": "",
               "type": "chain",
-              "props": {
-                "actions": [
-                  { "event": "", "type": "setState", "props": { "key": "state.loggedIn", "value": true } },
-                  { "event": "", "type": "navigate", "target": "/dashboard", "props": { "replace": true } }
-                ]
-              }
+              "actions": [
+                { "type": "storeToken", "props": { "key": "auth_token", "value": "{{verifyOtpResponse.data.token}}" } },
+                { "type": "setState", "props": { "key": "state.loggedIn", "value": true } },
+                { "type": "navigate", "props": { "route": "/dashboard", "replace": true } }
+              ]
             },
             "onFail": {
-              "event": "",
               "type": "toast",
-              "props": { "message": "Invalid OTP. Try again." }
+              "props": { "message": "{{_error.verifyOtp.message}}" }
             }
           }
         ]

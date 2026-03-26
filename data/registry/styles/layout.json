@@ -1,0 +1,53 @@
+{
+  "screenPadded": {
+    "padding": { "left": 24, "right": 24 },
+    "backgroundColor": "#colors.background"
+  },
+  "screenFlush": {
+    "backgroundColor": "#colors.background",
+    "padding": 0
+  },
+  "topBar": {
+    "padding": { "left": 16, "right": 16, "top": 12, "bottom": 8 },
+    "backgroundColor": "#colors.white"
+  },
+  "section": {
+    "padding": { "left": 16, "right": 16, "top": 12 }
+  },
+  "sectionTitle": {
+    "fontSize": "#typography.h3",
+    "fontWeight": "bold",
+    "color": "#colors.textPrimary"
+  },
+  "serviceTitle": {
+    "fontSize": "#typography.bodyLarge",
+    "fontWeight": "bold",
+    "color": "#colors.textPrimary"
+  },
+  "serviceSubtitle": {
+    "fontSize": "#typography.captionSmall",
+    "color": "#colors.textSecondary"
+  },
+  "heading": {
+    "fontSize": "#typography.h1",
+    "fontWeight": "bold",
+    "color": "#colors.textPrimary"
+  },
+  "subtitle": {
+    "fontSize": "#typography.body",
+    "color": "#colors.textSecondary"
+  },
+  "categoryLabel": {
+    "fontSize": "#typography.captionSmall",
+    "color": "#374151"
+  },
+  "pharmacyHeader": {
+    "backgroundColor": "#colors.blue",
+    "padding": { "left": 16, "right": 16, "top": 12, "bottom": 12 }
+  },
+  "pharmacySectionTitle": {
+    "fontSize": "#typography.bodyLarge",
+    "fontWeight": "w700",
+    "color": "#colors.textDark"
+  }
+}

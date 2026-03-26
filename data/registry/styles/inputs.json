@@ -1,0 +1,16 @@
+{
+  "field": {
+    "backgroundColor": "#colors.white",
+    "borderRadius": 12,
+    "borderColor": "#colors.divider",
+    "borderWidth": 1,
+    "fontSize": "#typography.body",
+    "color": "#colors.textPrimary"
+  },
+  "searchField": {
+    "backgroundColor": "#colors.white",
+    "borderRadius": 12,
+    "borderColor": "#colors.white",
+    "fontSize": "#typography.body"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "primary": "#E8734A",
+  "accent": "#F5A89A",
+  "background": "#FFE9DA",
+  "surface": "#F0F4FF",
+  "white": "#FFFFFF",
+  "black": "#000000",
+  "textPrimary": "#212121",
+  "textSecondary": "#9E9E9E",
+  "textDark": "#111827",
+  "textGrey": "#9CA3AF",
+  "badge": "#E8734A",
+  "badgeBg": "#FFF3EE",
+  "success": "#4CAF50",
+  "error": "#E53935",
+  "blue": "#1A56DB",
+  "teal": "#0F766E",
+  "purple": "#7B1FA2",
+  "green": "#2E7D6B",
+  "divider": "#E0E0E0",
+  "placeholder": "#BDBDBD",
+  "brand": {
+    "indigo": "#4F46E5",
+    "amber": "#D97706",
+    "emerald": "#16A34A",
+    "rose": "#E11D48",
+    "sky": "#0284C7",
+    "violet": "#A855F7",
+    "mint": "#059669",
+    "orange": "#F97316"
+  }
+}
